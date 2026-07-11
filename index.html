@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umuana | Arqueologia e Licenciamento Ambiental</title>
+    
+    <!-- SEO Básico -->
+    <meta name="description" content="Consultoria especializada em arqueologia aplicada ao licenciamento ambiental. Excelência técnica, rigor metodológico e respeito ao patrimônio.">
+    
+    <!-- Importando Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Importando Ícones (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Configuração do Tailwind CSS (Framework de Estilos) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // AQUI VOCÊ PODE ALTERAR AS CORES E FONTES NO FUTURO
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // O verde principal mantido conforme sua instrução. Pode ser ajustado.
+                        umuana: {
+                            green: '#5A6B47',      // Verde principal (baseado na logo)
+                            dark: '#162318',       // Verde muito escuro (quase preto)
+                            beige: '#bca38e',      // Bege do manual
+                            earth: '#8f5530',      // Marrom terra do manual
+                            gold: '#dbb213',       // Amarelo/Dourado do manual
+                            light: '#f9f9f8'       // Cor de fundo clara
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans', 'sans-serif'], // Fonte para textos longos
+                        heading: ['Noto Sans', 'sans-serif'], // Fonte para títulos
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos Customizados (CSS) -->
+    <style>
+        /* Classe para animação de fade-in ao rolar a página */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            visibility: hidden;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+            visibility: visible;
+        }
+        
+        /* Efeito de sobreposição de imagem no cabeçalho */
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(22, 35, 24, 0.9) 0%, rgba(22, 35, 24, 0.6) 100%);
+        }
+
+        /* Estilo do botão do WhatsApp flutuante */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 50;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-umuana-light antialiased selection:bg-umuana-green selection:text-white">
+
+    <!-- BARRA DE NAVEGAÇÃO (HEADER) -->
+    <header id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-sm shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center gap-3">
+                        <!-- Substitua o src abaixo pelo caminho da sua logo final -->
+                        <!-- Usando um ícone provisório caso a imagem não carregue -->
+                        <div class="w-10 h-10 bg-umuana-green text-white flex items-center justify-center rounded-full">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <span class="font-heading font-bold text-2xl tracking-widest text-umuana-dark">UMUANA</span>
+                    </a>
+                </div>
+
+                <!-- Menu Desktop -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-gray-600 hover:text-umuana-green font-medium transition-colors">Início</a>
+                    <a href="#sobre" class="text-gray-600 hover:text-umuana-green font-medium transition-colors">Sobre Nós</a>
+                    <a href="#servicos" class="text-gray-600 hover:text-umuana-green font-medium transition-colors">Serviços</a>
+                    <a href="#equipe" class="text-gray-600 hover:text-umuana-green font-medium transition-colors">Equipe</a>
+                    <a href="#contato" class="text-gray-600 hover:text-umuana-green font-medium transition-colors">Contato</a>
+                </nav>
+
+                <!-- Botão Menu Mobile -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-umuana-dark hover:text-umuana-green focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile (Escondido por padrão) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-lg">
+                <a href="#inicio" class="block px-3 py-2 text-gray-800 font-medium hover:text-umuana-green hover:bg-gray-50 rounded-md">Início</a>
+                <a href="#sobre" class="block px-3 py-2 text-gray-800 font-medium hover:text-umuana-green hover:bg-gray-50 rounded-md">Sobre Nós</a>
+                <a href="#servicos" class="block px-3 py-2 text-gray-800 font-medium hover:text-umuana-green hover:bg-gray-50 rounded-md">Serviços</a>
+                <a href="#equipe" class="block px-3 py-2 text-gray-800 font-medium hover:text-umuana-green hover:bg-gray-50 rounded-md">Equipe</a>
+                <a href="#contato" class="block px-3 py-2 text-gray-800 font-medium hover:text-umuana-green hover:bg-gray-50 rounded-md">Contato</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SEÇÃO INÍCIO (HERO) -->
+    <!-- DICA: Troque a URL da imagem por uma foto real de campo da sua equipe -->
+    <section id="inicio" class="relative h-screen flex items-center justify-center">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1518182170546-076616fdacdf?q=80&w=2070&auto=format&fit=crop" alt="Paisagem de campo" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in-section mt-16">
+            <span class="block text-umuana-beige font-semibold tracking-widest uppercase mb-4 text-sm md:text-base">Consultoria Especializada</span>
+            <h1 class="text-4xl md:text-6xl font-heading font-bold text-white leading-tight mb-6">
+                Arqueologia com método, direção e respeito ao patrimônio.
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
+                Onde o tempo, a terra e o legado se conectam. Atuamos com excelência no licenciamento ambiental em todo o território nacional.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#servicos" class="bg-umuana-green hover:bg-green-700 text-white font-semibold py-3 px-8 rounded transition-colors duration-300">
+                    Nossos Serviços
+                </a>
+                <a href="#contato" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-umuana-dark font-semibold py-3 px-8 rounded transition-colors duration-300">
+                    Fale com a gente
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO SOBRE NÓS -->
+    <section id="sobre" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Texto Sobre -->
+                <div class="fade-in-section">
+                    <h2 class="text-sm font-bold text-umuana-green tracking-widest uppercase mb-2">Sobre Nós</h2>
+                    <h3 class="text-3xl md:text-4xl font-heading font-bold text-umuana-dark mb-6">Preservando a memória histórica dos territórios brasileiros.</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Somos uma empresa de arqueologia especializada em consultoria aplicada ao licenciamento ambiental. Estamos comprometidos com a valorização da ancestralidade e a preservação da memória.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Atuamos com excelência técnica, precisão operacional em campo, rigor metodológico, otimização de recursos e profundo respeito às populações tradicionais, aos saberes originários e à legislação vigente (IN IPHAN 001/2015).
+                    </p>
+                    
+                    <!-- Diferenciais (Ícones) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="text-umuana-earth text-2xl mt-1"><i class="fa-solid fa-map-location-dot"></i></div>
+                            <div>
+                                <h4 class="font-bold text-umuana-dark">Biomas e Regiões</h4>
+                                <p class="text-sm text-gray-500">Experiência em diferentes contextos nacionais.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-umuana-earth text-2xl mt-1"><i class="fa-solid fa-scale-balanced"></i></div>
+                            <div>
+                                <h4 class="font-bold text-umuana-dark">Rigor Legal</h4>
+                                <p class="text-sm text-gray-500">Metodologia alinhada às diretrizes do IPHAN.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-umuana-earth text-2xl mt-1"><i class="fa-solid fa-users"></i></div>
+                            <div>
+                                <h4 class="font-bold text-umuana-dark">Respeito Ancestral</h4>
+                                <p class="text-sm text-gray-500">Compromisso com os direitos das populações.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="text-umuana-earth text-2xl mt-1"><i class="fa-solid fa-comments"></i></div>
+                            <div>
+                                <h4 class="font-bold text-umuana-dark">Comunicação</h4>
+                                <p class="text-sm text-gray-500">Técnica, acessível, sensível e transparente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cards de Missão, Visão e Valores -->
+                <div class="space-y-6 fade-in-section delay-100">
+                    <div class="bg-umuana-light p-8 rounded-lg border-l-4 border-umuana-green shadow-sm hover:shadow-md transition-shadow">
+                        <h4 class="text-xl font-heading font-bold text-umuana-dark mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-bullseye text-umuana-green"></i> Missão
+                        </h4>
+                        <p class="text-gray-600">Contribuir para a preservação do patrimônio arqueológico nacional por meio de soluções técnicas e éticas no contexto do licenciamento ambiental.</p>
+                    </div>
+                    <div class="bg-umuana-light p-8 rounded-lg border-l-4 border-umuana-beige shadow-sm hover:shadow-md transition-shadow">
+                        <h4 class="text-xl font-heading font-bold text-umuana-dark mb-3 flex items-center gap-2">
+                            <i class="fa-regular fa-eye text-umuana-beige"></i> Visão
+                        </h4>
+                        <p class="text-gray-600">Ser referência nacional em consultoria arqueológica, reconhecida pela qualidade técnica, responsabilidade socioambiental e compromisso com os territórios.</p>
+                    </div>
+                    <div class="bg-umuana-light p-8 rounded-lg border-l-4 border-umuana-earth shadow-sm hover:shadow-md transition-shadow">
+                        <h4 class="text-xl font-heading font-bold text-umuana-dark mb-3 flex items-center gap-2">
+                            <i class="fa-regular fa-gem text-umuana-earth"></i> Valores
+                        </h4>
+                        <ul class="text-gray-600 space-y-2 list-none">
+                            <li><i class="fa-solid fa-check text-umuana-green text-sm mr-2"></i> Compromisso ético</li>
+                            <li><i class="fa-solid fa-check text-umuana-green text-sm mr-2"></i> Respeito à diversidade cultural</li>
+                            <li><i class="fa-solid fa-check text-umuana-green text-sm mr-2"></i> Responsabilidade socioambiental</li>
+                            <li><i class="fa-solid fa-check text-umuana-green text-sm mr-2"></i> Excelência técnica e científica</li>
+                            <li><i class="fa-solid fa-check text-umuana-green text-sm mr-2"></i> Transparência e diálogo</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO SERVIÇOS -->
+    <section id="servicos" class="py-20 bg-umuana-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+                <h2 class="text-sm font-bold text-umuana-beige tracking-widest uppercase mb-2">Nossa Atuação</h2>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold mb-6">Serviços de Arqueologia e Licenciamento</h3>
+                <p class="text-gray-300">Prestamos suporte completo a empreendedores públicos e privados no cumprimento das exigências legais (IN IPHAN 001/2015).</p>
+            </div>
+
+            <!-- Grid de Serviços -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Serviço 1 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-lg hover:bg-white/10 transition-colors fade-in-section">
+                    <div class="w-14 h-14 bg-umuana-green rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-file-signature"></i>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold mb-3">FCA e Termos</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Preenchimento da Ficha de Caracterização de Atividade (FCA) para início do licenciamento. Preenchimento do Termo de Compromisso (Nível I).
+                    </p>
+                </div>
+
+                <!-- Serviço 2 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-lg hover:bg-white/10 transition-colors fade-in-section delay-100">
+                    <div class="w-14 h-14 bg-umuana-green rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-binoculars"></i>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold mb-3">Monitoramento e Avaliação</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Monitoramento Arqueológico (Nível II) e Avaliação de Potencial e de Impacto ao Patrimônio (PAPIPA/RAPIPA Nível IV e PAIPA/RAIPA Nível III).
+                    </p>
+                </div>
+
+                <!-- Serviço 3 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-lg hover:bg-white/10 transition-colors fade-in-section delay-200">
+                    <div class="w-14 h-14 bg-umuana-green rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-trowel"></i>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold mb-3">Arqueologia Preventiva</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Diagnóstico, prospecção e salvamento arqueológico. Curadoria de acervos, cadastro de sítios e cercamento/sinalização.
+                    </p>
+                </div>
+
+                <!-- Serviço 4 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-lg hover:bg-white/10 transition-colors fade-in-section">
+                    <div class="w-14 h-14 bg-umuana-green rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold mb-3">Educação Patrimonial</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Projetos integrados de educação, oficinas, exposições, capacitações e projetos participativos focados no resgate da memória territorial.
+                    </p>
+                </div>
+
+                <!-- Serviço 5 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-lg hover:bg-white/10 transition-colors fade-in-section delay-100">
+                    <div class="w-14 h-14 bg-umuana-green rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-landmark"></i>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold mb-3">Gestão do Patrimônio</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Programa de Gestão do Patrimônio Arqueológico (PGPA) e avaliação de Bens Tombados, Valorados ou Registrados.
+                    </p>
+                </div>
+
+                <!-- Serviço 6 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-lg hover:bg-white/10 transition-colors fade-in-section delay-200">
+                    <div class="w-14 h-14 bg-umuana-green rounded-lg flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold mb-3">Consultoria Técnica</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Elaboração de pareceres, relatórios e interlocução direta com órgãos de patrimônio (IPHAN) e processos federais/estaduais.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO EQUIPE -->
+    <section id="equipe" class="py-20 bg-umuana-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+                <h2 class="text-sm font-bold text-umuana-green tracking-widest uppercase mb-2">Quem Somos</h2>
+                <h3 class="text-3xl md:text-4xl font-heading font-bold text-umuana-dark mb-6">Nossa Equipe de Especialistas</h3>
+                <p class="text-gray-600">Profissionais altamente qualificados com experiência de campo em diversos estados brasileiros.</p>
+            </div>
+
+            <!-- DICA: Aqui você pode adicionar ou remover membros copiando a estrutura da <div class="bg-white..."> -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                
+                <!-- Membro 1: Ivo Moreira -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col fade-in-section hover:shadow-lg transition-shadow">
+                    <!-- Substitua pela foto do Ivo -->
+                    <div class="h-64 bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop" alt="Ivo Moreira" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 flex-grow">
+                        <h4 class="text-2xl font-heading font-bold text-umuana-dark mb-1">Ivo Moreira</h4>
+                        <p class="text-umuana-green font-medium mb-4">Arqueólogo</p>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Graduado pela Universidade Federal de Sergipe. Ampla experiência em projetos de arqueologia preventiva, resgate e análise laboratorial (destaque para material osteológico humano). Atuação em todos os níveis de Levantamento (IN 001/2015).
+                        </p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li><i class="fa-solid fa-chevron-right text-umuana-earth mr-2"></i> Bioarqueologia e Arqueologia Forense</li>
+                            <li><i class="fa-solid fa-chevron-right text-umuana-earth mr-2"></i> Gestão de projetos (PAPIPA, PAIPA, PGPA)</li>
+                            <li><i class="fa-solid fa-chevron-right text-umuana-earth mr-2"></i> Análise de materiais líticos e cerâmicos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Membro 2: Maurício Rocha -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col fade-in-section delay-100 hover:shadow-lg transition-shadow">
+                    <!-- Substitua pela foto do Maurício -->
+                    <div class="h-64 bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop" alt="Maurício Rocha" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 flex-grow">
+                        <h4 class="text-2xl font-heading font-bold text-umuana-dark mb-1">Maurício Rocha</h4>
+                        <p class="text-umuana-green font-medium mb-4">Arqueólogo</p>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Graduado pela UFS com sólida experiência em projetos Nível II, III e IV. Atuação forte na gestão, prospecção e resgate em empreendimentos de grande porte como energia renovável, mineração e infraestrutura.
+                        </p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li><i class="fa-solid fa-chevron-right text-umuana-earth mr-2"></i> Elaboração de FCA, PAIPA, RAIPA e PGPA</li>
+                            <li><i class="fa-solid fa-chevron-right text-umuana-earth mr-2"></i> Coordenação de equipes e geoprocessamento</li>
+                            <li><i class="fa-solid fa-chevron-right text-umuana-earth mr-2"></i> Mediação com órgãos e comunidades</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO MAPA/EXPERIÊNCIA -->
+    <section class="py-16 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section">
+            <h3 class="text-2xl font-heading font-bold text-umuana-dark mb-4">Experiência Nacional</h3>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+                A equipe UMUANA já liderou projetos de campo em 13 estados brasileiros, além de elaboração de relatórios técnicos de impacto (FCAs, PAIPAs, RAIPAs) com ênfase no setor minerário, elétrico e infraestrutura.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <!-- Badges de estados para ilustrar -->
+                <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Sergipe</span>
+                <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Minas Gerais</span>
+                <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Bahia</span>
+                <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Mato Grosso</span>
+                <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Pará</span>
+                <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Amapá</span>
+                <span class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">+ Outros 7 estados</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO CONTATO -->
+    <section id="contato" class="py-20 bg-umuana-green text-white relative">
+        <!-- Textura/Padrão de fundo opcional -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                
+                <!-- Informações de Contato -->
+                <div class="fade-in-section">
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Fale com a gente</h2>
+                    <p class="text-green-100 mb-10 text-lg">
+                        Pronto para integrar a arqueologia ao seu projeto? Entre em contato para solicitar um orçamento ou tirar dúvidas sobre licenciamento ambiental.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-green-200">Telefone / WhatsApp</p>
+                                <a href="https://wa.me/5531995703736" target="_blank" class="text-xl font-bold hover:underline">(31) 99570-3736</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-xl">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-green-200">E-mail</p>
+                                <a href="mailto:arqueoumuana@gmail.com" class="text-xl font-bold hover:underline">arqueoumuana@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-green-200">Site</p>
+                                <a href="http://www.umuana.com" class="text-xl font-bold hover:underline">www.umuana.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário de Contato -->
+                <div class="bg-white rounded-xl p-8 shadow-xl text-gray-800 fade-in-section delay-100">
+                    <h3 class="text-2xl font-heading font-bold text-umuana-dark mb-6">Envie uma mensagem</h3>
+                    <form action="#" method="POST" class="space-y-4">
+                        <!-- DICA: Para o formulário funcionar sem back-end complexo, você pode usar serviços como Formspree.io -->
+                        <div>
+                            <label for="nome" class="block text-sm font-medium text-gray-700 mb-1">Nome completo</label>
+                            <input type="text" id="nome" name="nome" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-umuana-green focus:border-umuana-green outline-none transition-colors" required>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-umuana-green focus:border-umuana-green outline-none transition-colors" required>
+                            </div>
+                            <div>
+                                <label for="telefone" class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
+                                <input type="tel" id="telefone" name="telefone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-umuana-green focus:border-umuana-green outline-none transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="mensagem" class="block text-sm font-medium text-gray-700 mb-1">Mensagem ou detalhes do projeto</label>
+                            <textarea id="mensagem" name="mensagem" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-umuana-green focus:border-umuana-green outline-none transition-colors resize-none" required></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-umuana-dark text-white font-bold py-3 px-4 rounded-md hover:bg-black transition-colors">
+                            Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ (FOOTER) -->
+    <footer class="bg-umuana-dark text-gray-400 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-gray-700 text-white flex items-center justify-center rounded-full">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <span class="font-heading font-bold text-xl tracking-wider text-white">UMUANA</span>
+                </div>
+
+                <div class="text-sm text-center md:text-left">
+                    &copy; <span id="year"></span> Umuana Arqueologia. Todos os direitos reservados.
+                </div>
+
+                <div class="flex gap-4">
+                    <!-- Links para Redes Sociais -->
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-umuana-green hover:text-white transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-umuana-green hover:text-white transition-colors">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-umuana-green hover:text-white transition-colors">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
+    <a href="https://wa.me/5531995703736" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Falar no WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script>
+        // 1. Atualizar o ano no rodapé automaticamente
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 2. Lógica do Menu Mobile
+        const btnMenu = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        btnMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Fechar menu mobile ao clicar em um link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 3. Efeito de fundo na Navbar ao rolar a página
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.replace('bg-white/95', 'bg-white');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.replace('bg-white', 'bg-white/95');
+            }
+        });
+
+        // 4. Animação de Fade-in (Aparecer suavemente ao rolar)
+        const fadeElements = document.querySelectorAll('.fade-in-section');
+        
+        const appearOptions = {
+            threshold: 0.15, // Porcentagem do elemento visível antes de animar
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Para de observar após animar 1 vez
+                }
+            });
+        }, appearOptions);
+
+        fadeElements.forEach(element => {
+            appearOnScroll.observe(element);
+        });
+    </script>
+</body>
+</html>
