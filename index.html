@@ -85,6 +85,31 @@
         .whatsapp-btn:hover {
             transform: scale(1.1);
         }
+        
+        /* Estilo do botão do Portfólio flutuante */
+        .portfolio-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px; /* Ficará no canto esquerdo */
+            background-color: #5A6B47; /* Verde Umuana */
+            color: white;
+            border-radius: 30px;
+            padding: 0 24px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 50;
+            transition: transform 0.3s ease;
+        }
+        .portfolio-btn:hover {
+            transform: scale(1.05);
+            background-color: #162318; /* Muda para o verde escuro ao passar o mouse */
+        }
     </style>
 </head>
 <body class="font-sans text-gray-800 bg-umuana-light antialiased selection:bg-umuana-green selection:text-white">
@@ -508,6 +533,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- BOTÃO FLUTUANTE DO PORTFÓLIO -->
+    <a href="documents/portfolio.pdf" target="_blank" rel="noopener noreferrer" class="portfolio-btn" aria-label="Ver Portfólio">
+        <i class="fa-solid fa-file-pdf text-2xl"></i>
+        <span>Ver Portfólio</span>
+    </a>
 
     <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
     <a href="https://wa.me/5531995703736" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Falar no WhatsApp">
